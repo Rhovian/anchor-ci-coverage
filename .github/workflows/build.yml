@@ -134,7 +134,7 @@ jobs:
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           ls node_modules/.bin
-          yarn 
+          yarn test
 
       - uses: actions/upload-artifact@v3
         if: always()
