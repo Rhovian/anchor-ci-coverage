@@ -6,7 +6,7 @@ declare_id!("GeqRnyZsQ3iShsMD11sB6rD9KtPCNHJ2y2hN5H4kdNoN");
 pub mod leveller {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+    pub fn initialize(_ctx: Context<Initialize>) -> Result<()> {
         Ok(())
     }
 }
