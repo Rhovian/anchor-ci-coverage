@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env:
-  solana_version: v1.16.14
+  solana_version: stable
   VERBOSE: 1
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Cache node dependencies
         uses: actions/cache@v3
@@ -35,13 +35,11 @@ jobs:
       - name: install node_modules
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          yarn --frozen-lockfile
+          yarn --frozen-lockfile --network-concurrency 2
 
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
           toolchain: stable
-          override: true
 
       - name: Cache rust
         uses: Swatinem/rust-cache@v2
@@ -76,11 +74,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Cache node dependencies
         uses: actions/cache@v3
@@ -88,13 +85,13 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Install dependencies
-        run: yarn install
+      - name: build
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
+        run: yarn build
 
       - name: Run lint
         run: yarn lint
-
-
 
   test:
     needs: [lint-client, lint-program]
@@ -106,7 +103,7 @@ jobs:
       - name: Use Node ${{ matrix.node }}
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Cache node dependencies
         uses: actions/cache@v3
