@@ -37,9 +37,9 @@ jobs:
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           yarn --frozen-lockfile --network-concurrency 2
 
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@nightly
         with:
-          toolchain: stable
+          toolchain: nightly
 
       - name: Cache rust
         uses: Swatinem/rust-cache@v2
