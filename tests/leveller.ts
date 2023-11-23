@@ -1,12 +1,12 @@
 import * as anchor from "@coral-xyz/anchor";
 import { Program } from "@coral-xyz/anchor";
-import { Leveller } from "../target/types/leveller";
+import { Example } from "../target/types/Example";
 
-describe("Leveller", () => {
+describe("Example", () => {
   // Configure the client to use the local cluster.
   anchor.setProvider(anchor.AnchorProvider.env());
 
-  const program = anchor.workspace.Leveller as Program<Leveller>;
+  const program = anchor.workspace.Example as Program<Example>;
 
   it("Is initialized!", async () => {
     // Add your test here.

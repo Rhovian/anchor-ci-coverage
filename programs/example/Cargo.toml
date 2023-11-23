@@ -1,12 +1,12 @@
 [package]
-name = "leveller"
+name = "example"
 version = "0.1.0"
 description = "Created with Anchor"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "leveller"
+name = "example"
 
 [features]
 no-entrypoint = []
@@ -17,8 +17,9 @@ default = []
 
 [dependencies]
 anchor-lang = "0.29.0"
-
+solana-program = "1.17.6"
 
 [dev-dependencies]
 solana-sdk = "1.16.19"
-solana-program-test = "1.16.19"
+anchor-client = "0.29.0"
+
