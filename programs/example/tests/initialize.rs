@@ -1,19 +1,15 @@
 use anchor_client::{Client, Cluster};
-use solana_sdk::signature::{read_keypair_file, Keypair, Signature};
-use solana_sdk::pubkey::Pubkey;
-use solana_sdk::signer::Signer;
-use std::rc::Rc;
-use std::error::Error;
-use std::env;
 use example::RustStation;
+use solana_sdk::pubkey::Pubkey;
+use solana_sdk::signature::{read_keypair_file, Keypair, Signature};
 use solana_sdk::system_program;
-use std::time::Duration;
-use std::thread;
+use std::env;
+use std::error::Error;
+use std::rc::Rc;
 
 #[test]
 fn test_initialize() -> Result<(), Box<dyn Error>> {
-    let mut path = env::var("HOME")
-    .expect("HOME environment variable not set");
+    let mut path = env::var("HOME").expect("HOME environment variable not set");
 
     path.push_str("/.config/solana/id.json");
 
@@ -22,21 +18,18 @@ fn test_initialize() -> Result<(), Box<dyn Error>> {
 
     let client = Client::new(Cluster::Localnet, payer.clone());
     let program = client.program(example::ID)?;
-    
+
     // let program_id = program.id();
     // let program_address = program_id.to_string();
     // let airdrop_result = program
     // .rpc()
     // .request_airdrop(&program.payer(), 10000000);
- 
+
     // assert!(airdrop_result.is_ok());
 
-    let balance = program
-        .rpc()
-        .get_balance(&program.payer())
-        .unwrap_or(0);
-        
-    println!("Payer balance: {} SOL", balance);   
+    let balance = program.rpc().get_balance(&program.payer()).unwrap_or(0);
+
+    println!("Payer balance: {} SOL", balance);
 
     // Build, sign, and send program instruction
     let rust_station: Pubkey = RustStation::get_pda(&program.payer());
