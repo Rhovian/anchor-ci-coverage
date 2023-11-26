@@ -13,10 +13,10 @@ main() {
 
   # Start validator 
   solana-test-validator -r --bpf-program $my_program_pid $my_program_so > test-validator.log &
-  sleep 10
+  sleep 60
 
   solana --url localhost airdrop 10 $(solana-keygen pubkey $keypath)
-  sleep 30
+  sleep 60
   # Run your program tests
   cargo test --manifest-path ./programs/example/Cargo.toml
 
