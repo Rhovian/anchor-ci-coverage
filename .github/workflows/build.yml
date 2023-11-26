@@ -103,6 +103,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Run test script
         run: |
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           sudo ./run-test.sh
 
   test-ts:
