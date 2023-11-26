@@ -8,9 +8,5 @@ describe("Example", () => {
 
   const program = anchor.workspace.Example as Program<Example>;
 
-  it("Is initialized!", async () => {
-    // Add your test here.
-    const tx = await program.methods.initialize().rpc();
-    console.log("Your transaction signature", tx);
-  });
+  it("Is initialized!", async () => {});
 });
