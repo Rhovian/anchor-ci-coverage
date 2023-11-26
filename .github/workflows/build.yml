@@ -93,7 +93,19 @@ jobs:
       - name: Run lint
         run: yarn lint
 
-  test:
+  test-rs:
+    needs: [lint-client, lint-program]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache rust
+        uses: Swatinem/rust-cache@v2
+      - name: Run test script
+        run: |
+          ./run-test.sh
+
+  test-ts:
     needs: [lint-client, lint-program]
     runs-on: ubuntu-latest
 
