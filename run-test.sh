@@ -12,7 +12,7 @@ main() {
   keypath="$home_dir/.config/solana/id.json"
 
   # Start validator 
-  solana-test-validator -r --bpf-program $my_program_pid $my_program_so > test-validator.log &
+  solana-test-validator --bpf-program $my_program_pid $my_program_so > test-validator.log &
   sleep 60
 
   solana --url localhost airdrop 10 $(solana-keygen pubkey $keypath)
