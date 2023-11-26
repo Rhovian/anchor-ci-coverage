@@ -104,6 +104,7 @@ jobs:
       - name: Run test script
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          chmod +x ./run-test.sh
           sudo ./run-test.sh
 
   test-ts:
