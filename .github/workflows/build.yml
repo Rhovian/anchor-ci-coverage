@@ -103,7 +103,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
       - name: Run test script
         run: |
-          ./run-test.sh
+          sudo ./run-test.sh
 
   test-ts:
     needs: [lint-client, lint-program]
