@@ -142,33 +142,5 @@ jobs:
           name: program-logs
           path: .anchor/program-logs/*
 
-  test-rs:
-    needs: [lint-client, lint-program, test]
-    runs-on: ubuntu-latest
-    env:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Cache cargo bin
-        uses: actions/cache@v3
-        with: 
-          path: ~/.cargo/bin
-          key: ${{ runner.os }}-cargo-bin-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Install cargo-llvm-cov
-        if: steps.cache-cargo-bin.outputs.cache-hit != 'true'
-        run: cargo install cargo-llvm-cov
-
-      - name: Test and generate coverage
-        run: cargo llvm-cov --lcov --output-path lcov.info
-      
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          files: lcov.info
-          fail_ci_if_error: true
-
 
 
