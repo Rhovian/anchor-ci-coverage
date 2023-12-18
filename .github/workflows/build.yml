@@ -99,6 +99,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Use Node ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Cache node dependencies
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: install node_modules
+        run: |
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          yarn --frozen-lockfile
       - name: Cache rust
         uses: Swatinem/rust-cache@v2
       - uses: actions/cache@v3
@@ -115,6 +129,7 @@ jobs:
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           solana --version
           solana-keygen new --silent --no-bip39-passphrase
+
       - name: Run anchor localnet
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
@@ -123,7 +138,7 @@ jobs:
       - name: Run anchor localnet
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          sleep 200
+          sleep 20
           cargo test --manifest-path ./programs/example/Cargo.toml
 
 
