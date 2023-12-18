@@ -115,11 +115,17 @@ jobs:
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           solana --version
           solana-keygen new --silent --no-bip39-passphrase
-      - name: Run test script
+      - name: Run anchor localnet
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          chmod +x ./run-test.sh
-          ./run-test.sh
+          anchor localnet &
+
+      - name: Run anchor localnet
+        run: |
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          sleep 200
+          cargo test --manifest-path ./programs/example/Cargo.toml
+
 
   test-ts:
     needs: [test-rs]
