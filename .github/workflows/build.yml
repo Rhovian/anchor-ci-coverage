@@ -96,7 +96,7 @@ jobs:
         uses: JarvusInnovations/background-action@v1  
         with:
           run: |
-            yarn localnet &
+            yarn localnet > yarn.log 2>&1 &
           wait-on: http://localhost:8899
           wait-for: 60s
 
