@@ -133,7 +133,8 @@ jobs:
       - name: Run anchor localnet
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          anchor localnet &
+          ls node_modules/.bin
+          yarn localnet &
 
       - name: Run anchor localnet
         run: |
