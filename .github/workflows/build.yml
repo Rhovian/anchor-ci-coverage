@@ -57,6 +57,7 @@ jobs:
           solana --version
 
   test-rs:
+    needs: [install]
     runs-on: ubuntu-latest
 
     steps:
