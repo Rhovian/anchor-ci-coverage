@@ -101,6 +101,13 @@ jobs:
           wait-on: http://localhost:8899
           wait-for: 60s
 
+      - name: Upload yarn logs
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: yarn-logs
+          path: yarn.log
+
       - name: Run tests
         run: | 
           cargo test --manifest-path ./programs/example/Cargo.toml
