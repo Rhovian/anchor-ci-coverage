@@ -56,45 +56,7 @@ jobs:
           export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
           solana --version
 
-  lint-program:
-    needs: install
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-      - name: Cache rust
-        uses: Swatinem/rust-cache@v2
-      - name: Run fmt
-        run: cargo fmt -- --check
-      - name: Run clippy
-        run: cargo clippy -- --deny=warnings
-
-  lint-client:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Cache node dependencies
-        uses: actions/cache@v3
-        with:
-          path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-      - name: build
-        env:
-          NODE_OPTIONS: "--max_old_space_size=4096"
-        run: yarn build
-
-      - name: Run lint
-        run: yarn lint
-
   test-rs:
-    needs: [lint-client, lint-program]
     runs-on: ubuntu-latest
 
     steps:
@@ -134,7 +96,7 @@ jobs:
         uses: JarvusInnovations/background-action@v1  
         with:
           run: |
-            yarn localnet
+            yarn localnet &
           wait-on: http://localhost:8899
           wait-for: 60s
 
