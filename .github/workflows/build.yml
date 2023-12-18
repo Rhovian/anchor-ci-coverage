@@ -97,6 +97,8 @@ jobs:
         uses: JarvusInnovations/background-action@v1  
         with:
           run: |
+            export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+            solana --version
             yarn localnet > yarn.log 2>&1 &
           wait-on: http://localhost:8899
           wait-for: 60s
