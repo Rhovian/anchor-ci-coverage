@@ -100,8 +100,8 @@ jobs:
             export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
             solana --version
             solana-test-validator > yarn.log 2>&1 &
-          wait-on: http://127.0.0.1:8899
-          wait-for: 300s
+          wait-on: http://localhost:8899
+          wait-for: 20s
 
       - name: Upload yarn logs
         uses: actions/upload-artifact@v3
