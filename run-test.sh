@@ -12,7 +12,7 @@ main() {
   # Start localnet
   anchor localnet > anchor-localnet.log 2>&1 &  
 
-  sleep 20
+  sleep 200
   
   # Run tests  
   cargo test --manifest-path ./programs/example/Cargo.toml
