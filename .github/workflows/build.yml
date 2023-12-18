@@ -101,7 +101,7 @@ jobs:
             solana --version
             solana-test-validator > yarn.log 2>&1 &
           wait-on: http://localhost:8899
-          wait-for: 20s
+          wait-for: 180s
 
       - name: Upload yarn logs
         uses: actions/upload-artifact@v3
