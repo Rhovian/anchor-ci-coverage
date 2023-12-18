@@ -119,7 +119,7 @@ jobs:
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           chmod +x ./run-test.sh
-          ./run-test.sh &
+          ./run-test.sh
 
   test-ts:
     needs: [test-rs]
