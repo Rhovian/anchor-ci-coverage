@@ -98,9 +98,9 @@ jobs:
         uses: JarvusInnovations/background-action@v1  
         with:
           run: |
-            yarn localnet
+            yarn localnet &
           wait-on: http://localhost:8899
-          wait-for: 180s
+          wait-for: 120s
 
       - name: Upload yarn logs
         uses: actions/upload-artifact@v3
