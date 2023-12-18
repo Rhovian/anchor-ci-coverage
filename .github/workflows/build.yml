@@ -101,7 +101,7 @@ jobs:
             solana --version
             yarn localnet > yarn.log 2>&1 &
           wait-on: http://127.0.0.1:8899
-          wait-for: 60s
+          wait-for: 300s
 
       - name: Upload yarn logs
         uses: actions/upload-artifact@v3
