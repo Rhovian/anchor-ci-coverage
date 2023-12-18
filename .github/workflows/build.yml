@@ -135,12 +135,8 @@ jobs:
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           ls node_modules/.bin
           yarn localnet &
-
-      - name: Run anchor localnet
-        run: |
-          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          sleep 20 &&
           cargo test --manifest-path ./programs/example/Cargo.toml
-
 
   test-ts:
     needs: [test-rs]
