@@ -130,12 +130,16 @@ jobs:
           solana --version
           solana-keygen new --silent --no-bip39-passphrase
 
-      - name: Run anchor localnet
-        run: |
-          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          ls node_modules/.bin
-          yarn localnet &
-          sleep 20 &&
+      - name: Start localnet
+        uses: JarvusInnovations/background-action@v1  
+        with:
+          run: |
+            yarn localnet
+          wait-on: http://localhost:8899
+          wait-for: 60s
+
+      - name: Run tests
+        run: | 
           cargo test --manifest-path ./programs/example/Cargo.toml
 
   test-ts:
