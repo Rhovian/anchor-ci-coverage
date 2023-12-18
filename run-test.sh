@@ -1,46 +1,30 @@
 #!/bin/bash
-
-set -euox pipefail
-
-# Your program 
-my_program_pid="GeqRnyZsQ3iShsMD11sB6rD9KtPCNHJ2y2hN5H4kdNoN"
-my_program_so="target/deploy/example.so"
+set -euo pipefail
 
 main() {
 
-  home_dir=$(eval echo ~$USER)
-  keypath="$home_dir/.config/solana/id.json"
+  # Check if port is available 
+  if nc -z 127.0.0.1 8899; then
+    echo "Port 8899 already in use"
+    exit 1
+  fi
+  
+  # Start localnet
+  anchor localnet > anchor-localnet.log 2>&1 &  
 
-  # Start validator 
-  solana-test-validator -r --bpf-program $my_program_pid $my_program_so > test-validator.log &
-  sleep 10
-
-  solana --url localhost airdrop 10 $(solana-keygen pubkey $keypath)
   sleep 20
-  # Run your program tests
+  
+  # Run tests  
   cargo test --manifest-path ./programs/example/Cargo.toml
 
-  # Cleanup 
-  cleanup
+  # Cleanup
+  cleanup anchor
 }
 
 cleanup() {
-  pkill -P $$ || true
-  wait || true
+  pkill -f anchor 
 }
 
-trap_add() {
-  trap_add_cmd=$1; shift || fatal "${FUNCNAME} usage error"
-  for trap_add_name in "$@"; do
-      trap -- "$(
-          extract_trap_cmd() { printf '%s\n' "${3:-}"; }
-          eval "extract_trap_cmd $(trap -p "${trap_add_name}")"
-          printf '%s\n' "${trap_add_cmd}"
-      )" "${trap_add_name}" \
-          || fatal "unable to add to trap ${trap_add_name}"
-  done
-}
-
-trap_add 'cleanup' EXIT
+trap 'cleanup' EXIT
 
 main
