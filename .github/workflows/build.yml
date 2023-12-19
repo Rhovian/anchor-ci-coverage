@@ -72,6 +72,7 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: install node_modules
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
@@ -97,9 +98,8 @@ jobs:
       - name: Start localnet
         uses: JarvusInnovations/background-action@v1  
         with:
-          run: |
-            yarn localnet &
-          wait-on: http://localhost:8899
+          run: yarn localnet > yarn.log 2>&1 &
+          wait-on: http://127.0.0.1:8899
           wait-for: 120s
 
       - name: Upload yarn logs
