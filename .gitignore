@@ -9,6 +9,7 @@ target/idl
 target/release
 target/types/
 target/sbf-solana-solana
+target/debug
 !target/deploy
 
 test-validator.log
