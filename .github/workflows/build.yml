@@ -96,16 +96,13 @@ jobs:
           solana-keygen new --silent --no-bip39-passphrase
 
       - name: Start localnet
+        uses: actions/wait-for@v
         env:
           RUST_BACKTRACE: full
-        uses: JarvusInnovations/background-action@v1  
         with:
           run: |
             export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-            solana-test-validator --bind-address 0.0.0.0 --ledger test-ledger | grep "JSON RPC URL"
-          wait-on: http://127.0.0.1:8899
-          wait-for: 240s
-          tail: true
+            solana-test-validator --bind-address 0.0.0.0 --ledger test-ledger --rpc-port 8899 &
 
       - name: Upload yarn logs
         uses: actions/upload-artifact@v3
