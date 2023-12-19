@@ -105,7 +105,7 @@ jobs:
           --ledger test-ledger \
           --rpc-port 8899 > validator.log 2>&1 &
           sleep 30
-          chmod +x ./run-test.sh
+          chmod +x ./run-test-ci.sh
           ./run-test-ci.sh
 
       - name: Upload yarn logs
