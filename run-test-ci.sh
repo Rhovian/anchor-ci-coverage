@@ -9,6 +9,10 @@ main() {
   program_so="./target/deploy/example.so"
   keypath="$home_dir/.config/solana/id.json"
 
+  echo "Key balance: $(solana balance $solana_key)"
+  echo "Config:"
+  solana config get
+
   solana program deploy \
     --program-id $program_id \
     $program_so \
