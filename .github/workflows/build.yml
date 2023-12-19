@@ -102,17 +102,7 @@ jobs:
         with:
           run: |
             export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-            PUBLIC_IP=$(curl https://api.ipify.org)  
-            echo "Public IP is $PUBLIC_IP"
-    
-            solana-test-validator \
-              --ledger $TEST_LEDGER_DIR \
-              --rpc-bind-address 0.0.0.0 \
-              --log $TEST_LEDGER_DIR \
-              > validator.log 2>&1 &
-    
-            RPC_URL=$(grep -oP '(?<=JSON RPC URL: http://)[^ ]+' validator.log)
-            echo "Validator RPC URL is $RPC_URL"    
+            solana-test-validator --bind-address 0.0.0.0 > yarn.log 2>&1 &
           wait-on: http://0.0.0.0:8899
           wait-for: 240s
           tail: true
