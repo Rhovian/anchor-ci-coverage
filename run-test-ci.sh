@@ -4,14 +4,14 @@ set -euox pipefail
 
 main() {
 
+  solana config set -u localhost
+
   home_dir=$(eval echo ~$USER)
   program_id="./target/deploy/example-keypair.json"
   program_so="./target/deploy/example.so"
   keypath="$home_dir/.config/solana/id.json"
 
-  echo "Key balance: $(solana balance $solana_key)"
-  echo "Config:"
-  solana config get
+  echo "Key balance: $(solana balance $keypath)"
 
   solana program deploy \
     --program-id $program_id \
