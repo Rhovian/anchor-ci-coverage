@@ -95,11 +95,10 @@ jobs:
           solana --version
           solana-keygen new --silent --no-bip39-passphrase
 
-      - name: Start localnet
-        with:
-          run: |
-            export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-            yarn anchor:build
+      - name: Build anchor
+        run: |
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          yarn anchor:build
 
       - name: Start localnet
         env:
