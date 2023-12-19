@@ -1,10 +1,14 @@
 
 .anchor
 .DS_Store
-target
 **/*.rs.bk
 node_modules
 test-ledger
 .yarn
+target/idl
+target/release
+target/types/
+target/sbf-solana-solana
+!target/deploy
 
 test-validator.log
