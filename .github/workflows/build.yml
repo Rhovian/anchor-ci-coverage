@@ -96,13 +96,16 @@ jobs:
           solana-keygen new --silent --no-bip39-passphrase
 
       - name: Start localnet
+        env:
+          RUST_BACKTRACE: 1
         uses: JarvusInnovations/background-action@v1  
         with:
           run: |
             export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+            yarn keys
             yarn localnet > yarn.log 2>&1 &
           wait-on: http://127.0.0.1:8899
-          wait-for: 500s
+          wait-for: 120s
           tail: true
 
       - name: Upload yarn logs
