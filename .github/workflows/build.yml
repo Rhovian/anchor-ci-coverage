@@ -102,7 +102,7 @@ jobs:
 
       - name: Start localnet
         env:
-          RUST_BACKTRACE: 1
+          RUST_BACKTRACE: full
         uses: JarvusInnovations/background-action@v1  
         with:
           run: |
