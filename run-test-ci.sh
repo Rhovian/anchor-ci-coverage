@@ -2,13 +2,11 @@
 
 set -euox pipefail
 
-# Your program 
-program_id="target/deploy/example-keypair.json"
-program_so="target/deploy/example.so"
-
 main() {
 
   home_dir=$(eval echo ~$USER)
+  program_id="$home_dir/target/deploy/example-keypair.json"
+  program_so="$home_dir/target/deploy/example.so"
   keypath="$home_dir/.config/solana/id.json"
 
   solana program deploy \
