@@ -95,11 +95,6 @@ jobs:
           solana --version
           solana-keygen new --silent --no-bip39-passphrase
 
-      - name: Build anchor
-        run: |
-          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          yarn anchor:build
-
       - name: Start localnet
         env:
           RUST_BACKTRACE: full
@@ -107,8 +102,7 @@ jobs:
         with:
           run: |
             export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-            yarn keys
-            yarn localnet > yarn.log 2>&1 &
+            solana-test-validator > yarn.log 2>&1 &
           wait-on: http://127.0.0.1:8899
           wait-for: 240s
           tail: true
