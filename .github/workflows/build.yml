@@ -98,7 +98,9 @@ jobs:
       - name: Start localnet
         uses: JarvusInnovations/background-action@v1  
         with:
-          run: yarn localnet > yarn.log 2>&1 &
+          run: |
+            export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+            yarn localnet > yarn.log 2>&1 &
           wait-on: http://127.0.0.1:8899
           wait-for: 120s
 
