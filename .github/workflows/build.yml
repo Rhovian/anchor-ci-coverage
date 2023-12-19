@@ -101,7 +101,7 @@ jobs:
         run: |
           export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
           solana-test-validator \
-          --bind-address 0.0.0.0 \  
+          --bind-address 0.0.0.0 \
           --ledger test-ledger \
           --rpc-port 8899 > validator.log 2>&1 &
           sleep 30
