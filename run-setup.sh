@@ -1,5 +1,5 @@
 # clean anchor workspace, build anchor, sync keys
-npm run anchor:keys:sync
+npm run anchor:setup
 
 # Get the new PROGRAM_ID
 NEW_ID=$(npm run anchor:keys:list | grep leveller | cut -d: -f2 | tr -d '[:space:]')

@@ -5,11 +5,6 @@
 node_modules
 test-ledger
 .yarn
-target/idl
-target/release
-target/types/
-target/sbf-solana-solana
-target/debug
-!target/deploy
+target
 
 test-validator.log
