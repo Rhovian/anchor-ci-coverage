@@ -3,6 +3,8 @@
         "build": "echo no build",
         "test": "anchor test",
         "localnet": "anchor localnet",
+        "anchor:keys:sync": "anchor keys sync",
+        "anchor:keys:list": "anchor keys list",
         "anchor:setup": "anchor clean && anchor build && anchor keys sync",
         "keys": "anchor keys list",
         "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
